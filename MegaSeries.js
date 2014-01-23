@@ -1,4 +1,6 @@
 /**
+ * 2010
+ * 
  * @fileoverview MegaSeries is an interactive time series plug-in to visualizes
  * large time series.
  *
