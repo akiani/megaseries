@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>MegaSeries Demo</title>
+<style>
+body,td {
+    font: 14px/134% Helvetica Neue, sans-serif;
+}
+</style>
+<script src="../protovis-d3.2.js"></script>
+<script type="text/javascript" src="MegaSeries_test_data.js"></script>
+<script type="text/javascript" src="../MegaSeries.js"></script>
+</head>
+<body>
+<table style="width: 100%; height: 100%">
+    <tr>
+        <td align="center" valign="middle">
+
+
+        <div id="fig"><script type="text/javascript+protovis"
+            src="MegaSeries.js"> 
+        var start = new Date().getTime();
+
+        var megaSeries = new MegaSeries(
+           document.getElementById('fig'));
+        megaSeries.addSeries("series1", data1, {}, {});
+        megaSeries.draw({});
+        megaSeries.config_.mouseMoveHandler = function(){
+            //could add a mouseMoveHandler here
+        }
+
+        var end = new Date().getTime();
+        var time = end - start;
+        document.getElementById("info").innerHTML = "Render time: " + time + " ms.";
+        updateNumber();
+    </script> 
+    
+    <script>
+
+    function updateNumber(){
+        document.getElementById("number").innerHTML = megaSeries.series.length;
+        document.getElementById("number_points").innerHTML = 
+            megaSeries.series.length * megaSeries.series[0].getXYData().length;
+    }
+    
+    function addSeries(){
+        var data = [];
+        document.getElementById("info").innerHTML = "Generating a new series...";
+        var lastOne = megaSeries.series[megaSeries.series.length-1].getXYData();
+        for (var i = 0; i < lastOne.length ; i++){
+            var d = {};
+            d.x = lastOne[i].x;
+            d.y = .8 * lastOne[i].y;
+            data.push(d);
+        }
+
+        var start = new Date().getTime();
+        megaSeries.addSeries("series", data, {}, {});
+        megaSeries.draw({});
+        var end = new Date().getTime();
+        var time = end - start;
+        updateNumber();
+        document.getElementById("info").innerHTML = "Render time: " + time + " ms.";
+    }
+
+    function removeSeries(){
+        if(megaSeries.series.length > 1){
+            var start = new Date().getTime();
+            megaSeries.series.pop();
+            megaSeries.draw({});
+            var end = new Date().getTime();
+            var time = end - start;
+            updateNumber();
+            document.getElementById("info").innerHTML = "Render time: " + time + " ms.";
+        }
+    }
+    </script></div>
+        <br>
+        <button onclick="addSeries();">Add Series</button>
+        <br>
+        <button onclick="removeSeries();">Remove Series</button>
+        <br>
+
+        <br>
+        <br>
+        Number of series: <span id="number"></span> <br>
+        Number of data points: <span id="number_points"></span> <br>
+        <span id="info"></span></td>
+    </tr>
+</table>
+</body>
+</html>
