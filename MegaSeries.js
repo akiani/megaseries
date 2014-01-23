@@ -1,10 +1,6 @@
-// Copyright 2011 Google Inc. All Rights Reserved.
 /**
  * @fileoverview MegaSeries is an interactive time series plug-in to visualizes
  * large time series.
- *
- * @see <a href="https://qwiki.corp.google.com/display/IQ/NumerologyTimeplot">
- *  burcaprat's notes on suggested features for this plug-in.</a>
  *
  * Current features:
  *  - Visualizing one or more Series with large data size (>2000 data points)
@@ -32,15 +28,11 @@
  *   you can use the version in third_party/javascript/protovis.
  *
  *
- * @author akiani@google.com (Amirhossein Kiani)
+ * @author akiani (Amirhossein Kiani)
  */
 
 /**
  * Constructs a new MegaSeries to be rendered inside the given container.
- *
- * Similar to other Google Visualization API compatible classes, the chart is
- * actually rendered in the draw() method, not here. This constructor only
- * performs some internal setup.
  *
  * @param {Element}
  *            container The HTML container to draw in.
@@ -549,9 +541,6 @@ MegaSeries.prototype.drawVisualization_ = function(config) {
 /**
  * Transforms location on the canvas to an interval in each Series and returns
  * that part of the Series.
- *
- * TODO(akiani): this could be more efficient per Burc's suggestion by creating
- * a mapping array from the begining.
  *
  * @param {Object} 
  *            config Config object that keeps track of state.
